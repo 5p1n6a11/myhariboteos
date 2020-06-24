@@ -1,3 +1,3 @@
 # myhariboteos
 
-## make Haribote OS run !!
+make Haribote OS run !!
