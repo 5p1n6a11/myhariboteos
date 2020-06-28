@@ -16,7 +16,7 @@
 
 [SECTION .text]
 
-_io_hlt:	; void io_htl(void);
+_io_hlt:	; void io_hlt(void);
 	HLT
 	RET
 
@@ -79,14 +79,14 @@ _io_store_eflags:	; void io_store_eflags(int eflags);
 	POPFD		; POP EFLAGS という意味
 	RET
 
-_load_gdtr:		; void load_idtr(int limit, int addr);
+_load_gdtr:		; void load_gdtr(int limit, int addr);
 	MOV	AX,[ESP+4]	; limit
 	MOV	[ESP+6],AX
 	LGDT	[ESP+6]
 	RET
 
 _load_idtr:		; void load_idtr(int limit, int addr);
-	MOV	AX, [ESP+4]	; limit
+	MOV	AX,[ESP+4]	; limit
 	MOV	[ESP+6],AX
 	LIDT	[ESP+6]
 	RET
@@ -104,8 +104,8 @@ _asm_inthandler21:
 	POP	EAX
 	POPAD
 	POP	DS
-	PO	ES
-	IRED
+	POP	ES
+	IRETD
 
 _asm_inthandler27:
 	PUSH	ES
