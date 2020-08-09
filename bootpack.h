@@ -126,7 +126,7 @@ extern struct FIFO8 mousefifo;
 /* memory.c */
 #define MEMMAN_FREES        4090	/* これで約32KB */
 #define MEMMAN_ADDR         0x003c0000
-struct FREEINFO {	/* 空き情報 */
+struct FREEINFO {	/* あき情報 */
 	unsigned int addr, size;
 };
 struct MEMMAN {		/* メモリ管理 */
@@ -170,7 +170,7 @@ struct TIMER {
     unsigned char data;
 };
 struct TIMERCTL {
-    unsigned int count;
+    unsigned int count, next;
     struct TIMER timer[MAX_TIMER];
 };
 extern struct TIMERCTL timerctl;
