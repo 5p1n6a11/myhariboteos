@@ -75,7 +75,7 @@ void HariMain(void)
         task_b[i]->tss.fs = 1 * 8;
         task_b[i]->tss.gs = 1 * 8;
         *((int *) (task_b[i]->tss.esp + 4)) = (int) sht_win_b[i];
-        task_run(task_b[i]);
+        task_run(task_b[i], i + 1);
     }
 
     /* sht_win */
@@ -230,7 +230,7 @@ void make_window8(unsigned char *buf, int xsize, int ysize, char *title, char ac
 	boxfill8(buf, xsize, COL8_848484, xsize - 2, 1,         xsize - 2, ysize - 2);
 	boxfill8(buf, xsize, COL8_000000, xsize - 1, 0,         xsize - 1, ysize - 1);
 	boxfill8(buf, xsize, COL8_C6C6C6, 2,         2,         xsize - 3, ysize - 3);
-	boxfill8(buf, xsize, tbc        , 3,         3,         xsize - 4, 20       );
+	boxfill8(buf, xsize, tbc,         3,         3,         xsize - 4, 20       );
 	boxfill8(buf, xsize, COL8_848484, 1,         ysize - 2, xsize - 2, ysize - 2);
 	boxfill8(buf, xsize, COL8_000000, 0,         ysize - 1, xsize - 1, ysize - 1);
 	putfonts8_asc(buf, xsize, 24, 4, tc, title);
