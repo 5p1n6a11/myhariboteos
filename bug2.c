@@ -1,5 +1,0 @@
-void HariMain(void)
-{
-    for (;;) { }
-}
-
