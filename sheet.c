@@ -38,6 +38,7 @@ struct SHEET *sheet_alloc(struct SHTCTL *ctl)
 			sht = &ctl->sheets0[i];
 			sht->flags = SHEET_USE; /* 使用中マーク */
 			sht->height = -1; /* 非表示中 */
+            sht->task = 0; /* 自動で閉じる機能を使わない */
 			return sht;
 		}
 	}
@@ -58,14 +59,13 @@ void sheet_refreshmap(struct SHTCTL *ctl, int vx0, int vy0, int vx1, int vy1, in
 	int h, bx, by, vx, vy, bx0, by0, bx1, by1;
 	unsigned char *buf, sid, *map = ctl->map;
 	struct SHEET *sht;
-
 	if (vx0 < 0) { vx0 = 0; }
 	if (vy0 < 0) { vy0 = 0; }
 	if (vx1 > ctl->xsize) { vx1 = ctl->xsize; }
 	if (vy1 > ctl->ysize) { vy1 = ctl->ysize; }
 	for (h = h0; h <= ctl->top; h++) {
 		sht = ctl->sheets[h];
-		sid = sht - ctl->sheets0; /* 番地を引き算してそれと下じき番号として利用 */
+		sid = sht - ctl->sheets0; /* 番地を引き算してそれを下じき番号として利用 */
 		buf = sht->buf;
 		bx0 = vx0 - sht->vx0;
 		by0 = vy0 - sht->vy0;
@@ -102,7 +102,7 @@ void sheet_refreshsub(struct SHTCTL *ctl, int vx0, int vy0, int vx1, int vy1, in
 		sht = ctl->sheets[h];
 		buf = sht->buf;
 		sid = sht - ctl->sheets0;
-		/* vx0〜xy1を使って，bx0〜by1を逆算する */
+		/* vx0〜vy1を使って，bx0〜by1を逆算する */
 		bx0 = vx0 - sht->vx0;
 		by0 = vy0 - sht->vy0;
 		bx1 = vx1 - sht->vx0;
