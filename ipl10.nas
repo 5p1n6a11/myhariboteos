@@ -51,7 +51,7 @@ retry:
 	MOV	BX,0
 	MOV	DL,0x00		; Aドライブ
 	INT	0x13		; ディスクBIOS呼び出し
-	JNC	next		; エラーが起きなければnextへ
+	JNC	next		; エラーがおきなければnextへ
 	ADD	SI,1		; SIに1を足す
 	CMP	SI,5		; SIと5を比較
 	JAE	error		; SI >= 5 だったらerrorへ
@@ -81,6 +81,8 @@ next:
 	JMP	0xc200
 
 error:
+        MOV     AX,0
+        MOV     ES,AX
         MOV     SI,msg
 putloop:
         MOV     AL,[SI]
