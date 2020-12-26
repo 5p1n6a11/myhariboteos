@@ -1,0 +1,9 @@
+*.obj
+*.bim
+*.hrb
+*.lst
+*.map
+*.bin
+*.sys
+*.img
+*.lib
